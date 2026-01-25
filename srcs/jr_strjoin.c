@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                              //  __________________ \\     */
 /*                                             //   \##### :: #######/ //     */
-/*   jr_strsub.c                               \\    \##__|::|##__##/ //      */
+/*   jr_strjoin.c                              \\    \##__|::|##__##/ //      */
 /*                                                ()      |++|  ______        */
 /*   By: julien <julienrollan@gmx.fr>          ()     /|  |++|        \       */
 /*                                                 ()/#|__|##   /      |      */
@@ -11,20 +11,30 @@
 /* ************************************************************************** */
 #include "libjr.h"
 
-char	*jr_strsub(const char *s, unsigned int start, size_t n)
+char	*jr_strjoin(const char *s1, const char *s2)
 {
 	size_t	i;
+	size_t	j;
 	char	*result;
 
-	result = malloc(sizeof(char) * (n + 1));
-	if (!s || !start || !n || !result)
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (s2[j] != '\0')
+		j++;
+	result = malloc(sizeof(char) * (i + j + 1));
+	if (!s1 || !s2 || !result)
 		return (NULL);
 	i = 0;
-	while (i < n)
+	while (s1[i] != '\0')
 	{
-		result[i] = s[start + i];
+		result[i] = s1[i];
 		i++;
 	}
+	j = 0;
+	while (s2[j] != '\0')
+		result[i++] = s2[j++];
 	result[i] = '\0';
 	return (result);
 }

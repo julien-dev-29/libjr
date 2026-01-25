@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                              //  __________________ \\     */
 /*                                             //   \##### :: #######/ //     */
-/*   jr_strsub.c                               \\    \##__|::|##__##/ //      */
+/*   jr_putnbr.c                               \\    \##__|::|##__##/ //      */
 /*                                                ()      |++|  ______        */
 /*   By: julien <julienrollan@gmx.fr>          ()     /|  |++|        \       */
 /*                                                 ()/#|__|##   /      |      */
@@ -11,20 +11,19 @@
 /* ************************************************************************** */
 #include "libjr.h"
 
-char	*jr_strsub(const char *s, unsigned int start, size_t n)
+void	jr_putnbr(int n)
 {
-	size_t	i;
-	char	*result;
-
-	result = malloc(sizeof(char) * (n + 1));
-	if (!s || !start || !n || !result)
-		return (NULL);
-	i = 0;
-	while (i < n)
+	if (n == -2147483648)
 	{
-		result[i] = s[start + i];
-		i++;
+		write(1, "-2147483648", 1);
+		return;
 	}
-	result[i] = '\0';
-	return (result);
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+	}
+	if (n >= 10)
+		jr_putnbr(n / 10);
+	write(1, &"0123456789"[n % 10], 1);
 }

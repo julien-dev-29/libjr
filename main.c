@@ -19,12 +19,6 @@ void	jr_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	jr_putstr(char *str)
-{
-	while (*str)
-		write(1, str++, 1);
-}
-
 char	jrmain_toupper(unsigned int i, char c)
 {
 	if (c >= 'a' && c <= 'z')
@@ -33,7 +27,16 @@ char	jrmain_toupper(unsigned int i, char c)
 
 int main(void)
 {
-	jr_putstr(jr_strmapi("yolo les kikis", jrmain_toupper));
+	t_list	*node;
+	char *str;
+
+	str = "Yolo les kikis!";
+	node = jr_lstnew(str); 
+	if (node)
+	{
+		jr_putstr((char *)node->content);
+		free(node);
+	}
 	write(1, "\n", 1);
 	return (0);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                              //  __________________ \\     */
 /*                                             //   \##### :: #######/ //     */
-/*   jr_strsub.c                               \\    \##__|::|##__##/ //      */
+/*   jr_itoa.c                                 \\    \##__|::|##__##/ //      */
 /*                                                ()      |++|  ______        */
 /*   By: julien <julienrollan@gmx.fr>          ()     /|  |++|        \       */
 /*                                                 ()/#|__|##   /      |      */
@@ -11,20 +11,42 @@
 /* ************************************************************************** */
 #include "libjr.h"
 
-char	*jr_strsub(const char *s, unsigned int start, size_t n)
+int	jr_len(int n)
 {
-	size_t	i;
-	char	*result;
+	int	len;
 
-	result = malloc(sizeof(char) * (n + 1));
-	if (!s || !start || !n || !result)
-		return (NULL);
-	i = 0;
-	while (i < n)
+	len = 0;
+	if (n <= 0)
+		len++;
+	while (n != 0)
 	{
-		result[i] = s[start + i];
-		i++;
+		n /= 10;
+		len++;
 	}
-	result[i] = '\0';
-	return (result);
+	return (len);
+}
+
+char	*jr_itoa(int n)
+{
+	char	*str;
+	int		len;
+	long	nb;
+
+	nb = n;
+	len = jr_len(n);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	str[len] = '\0';
+	if (nb < 0)
+	{
+		str[0] = '-';
+		nb = -nb;
+	}
+	while (len-- > 0 && str[len] != '-')
+	{
+		str[len] = (nb % 10) + '0';
+		nb /= 10;
+	}
+	return (str);
 }

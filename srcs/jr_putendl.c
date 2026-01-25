@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                              //  __________________ \\     */
 /*                                             //   \##### :: #######/ //     */
-/*   jr_strsub.c                               \\    \##__|::|##__##/ //      */
+/*   jr_putendl.c                              \\    \##__|::|##__##/ //      */
 /*                                                ()      |++|  ______        */
 /*   By: julien <julienrollan@gmx.fr>          ()     /|  |++|        \       */
 /*                                                 ()/#|__|##   /      |      */
@@ -11,20 +11,9 @@
 /* ************************************************************************** */
 #include "libjr.h"
 
-char	*jr_strsub(const char *s, unsigned int start, size_t n)
+void	jr_putendl(const char *s)
 {
-	size_t	i;
-	char	*result;
-
-	result = malloc(sizeof(char) * (n + 1));
-	if (!s || !start || !n || !result)
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		result[i] = s[start + i];
-		i++;
-	}
-	result[i] = '\0';
-	return (result);
+	while (*s)
+		write(1, s++, 1);
+	write(1, "\n", 1);
 }

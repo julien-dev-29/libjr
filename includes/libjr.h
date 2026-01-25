@@ -17,6 +17,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef struct s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}	t_list;
+
 void	*jr_memset(void *s, int c, size_t n);
 void	jr_bzero(void *s, size_t n);
 void	*jr_memcpy(void *dst, void *src, size_t n);
@@ -54,5 +61,22 @@ char	*jr_strmap(const char *s, char (*f)(char));
 char	*jr_strmapi(const char *s, char (*f)(unsigned int, char));
 int		jr_strequ(const char *s1, const char *s2);
 char	*jr_strsub(const char *s, unsigned int start, size_t len);
+char	*jr_strjoin(const char *s1, const char *s2);
+char	*jr_strtrim(const char *s);
+char	**jr_strsplit(const char *s, char c);
+char	*jr_itoa(int n);
+void	jr_putchar(char c);
+void	jr_putstr(const char *s);
+void	jr_putendl(const char *s);
+void	jr_putnbr(int n);
+void	jr_putchar_fd(char c, int fd);
+void	jr_putstr_fd(const char *s, int fd);
+void	jr_putendl_fd(const char *s, int fd);
+t_list	*jr_lstnew(const void *content);
+void	jr_lstdelone(t_list *lst, void (*del)(void *));
+void	jr_lstclear(t_list **alst, void (*del)(void *));
+void	jr_lstadd_front(t_list **alst, t_list *new);
+void	jr_lstiter(t_list *lst, void (*f)(t_list *elem));
+t_list	jr_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 #endif

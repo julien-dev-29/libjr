@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                              //  __________________ \\     */
 /*                                             //   \##### :: #######/ //     */
-/*   jr_strsub.c                               \\    \##__|::|##__##/ //      */
+/*   jr_lstnew.c                               \\    \##__|::|##__##/ //      */
 /*                                                ()      |++|  ______        */
 /*   By: julien <julienrollan@gmx.fr>          ()     /|  |++|        \       */
 /*                                                 ()/#|__|##   /      |      */
-/*   Created: 2025/12/21 09:58:00 by julien         /_____|    /| |   /       */
-/*   Updated: 2025/12/21 10:00:00 by julien        /_________ />++| \-\       */
+/*   Created: 2026/01/05 16:38:00 by julien         /_____|    /| |   /       */
+/*   Updated: 2026/01/05 00:00:00 by julien        /_________ />++| \-\       */
 /*                                                /::::::::: /<|_|  \__\      */
 /* ************************************************************************** */
 #include "libjr.h"
 
-char	*jr_strsub(const char *s, unsigned int start, size_t n)
+t_list	*jr_lstnew(const void *content)
 {
-	size_t	i;
-	char	*result;
+	t_list	*node;
 
-	result = malloc(sizeof(char) * (n + 1));
-	if (!s || !start || !n || !result)
+	node = (t_list *)malloc(sizeof(t_list));
+	if (!node)
 		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		result[i] = s[start + i];
-		i++;
-	}
-	result[i] = '\0';
-	return (result);
+	node->content = (void *)content;
+	node->next = NULL;
+	return (node);
 }
