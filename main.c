@@ -27,16 +27,21 @@ char	jrmain_toupper(unsigned int i, char c)
 
 int main(void)
 {
-	t_list	*node;
-	char *str;
+	int *tab;
+	size_t len;
+	size_t i;
 
-	str = "Yolo les kikis!";
-	node = jr_lstnew(str); 
-	if (node)
+	len = 5;
+	i = 0;
+	tab = (int *)jr_calloc(len, sizeof(int));	
+	if (!tab)
 	{
-		jr_putstr((char *)node->content);
-		free(node);
+		printf("Echec de l'allocation mémoire \n");
+		return (1);
 	}
-	write(1, "\n", 1);
+	printf("Tableau alloué et initialisé à 0\n");
+	while (i < len)
+		printf("tab[%zu] = %d\n", i, tab[i++]);
+	free(tab);
 	return (0);
 }
