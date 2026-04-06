@@ -24,6 +24,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int		get_next_line(const int fd, char **line);
 void	*jr_memset(void *s, int c, size_t n);
 void	jr_bzero(void *s, size_t n);
 void	*jr_memcpy(void *dst, void *src, size_t n);
@@ -79,5 +80,6 @@ void	jr_lstadd_front(t_list **alst, t_list *new);
 void	jr_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list	jr_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void	*jr_calloc(size_t nmemb, size_t size);
+char **jr_split(char const *s, char c);
 
 #endif
